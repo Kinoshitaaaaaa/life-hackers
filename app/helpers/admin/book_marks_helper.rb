@@ -1,0 +1,2 @@
+module Admin::BookMarksHelper
+end
