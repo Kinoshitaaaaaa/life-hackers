@@ -1,23 +1,5 @@
 Rails.application.routes.draw do
 
-
-
-  namespace :public do
-    get 'comments/index'
-    get 'comments/show'
-    get 'comments/edit'
-  end
-  namespace :public do
-    get 'posts/show'
-    get 'posts/edit'
-    get 'posts/index'
-  end
-  namespace :public do
-    get 'users/show'
-    get 'users/index'
-    get 'users/edit'
-  end
-
  devise_for :users,skip: [:passwords], controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
@@ -33,6 +15,11 @@ namespace :admin do
 
 scope module: :public do
   root "homes#top"
+  get "/about" => "homes#about"
+  resources :users,only: [:index, :create, :new, :show, :edit, :update]
+  get "/users/unsubscribe" => "users#unsubscribe"
+  patch "/users/is_deleted" => "users#is_deleted"
+  resources :posts,only: [:new,:create,:index,:show,:destroy,:edit,:update]
  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
