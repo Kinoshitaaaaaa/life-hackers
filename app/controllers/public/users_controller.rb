@@ -31,6 +31,7 @@ class Public::UsersController < ApplicationController
     @user=current_user
     @post=Post.new
     @users=User.all
+    
   end
 
   def is_deleted
@@ -49,7 +50,7 @@ class Public::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :introduction, :profile_imaage)
+    params.require(:user).permit(:user_name, :introduction, :profile_image)
   end
 
 end

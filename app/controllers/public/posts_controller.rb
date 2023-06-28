@@ -1,10 +1,12 @@
 class Public::PostsController < ApplicationController
   def new
     @post=Post.new
+    @user=current_user
   end
 
   def create
     @post = Post.new(post_params)
+    @post.genre_id =
     @post.user_id = current_user.id
     @user=current_user
 
@@ -32,6 +34,14 @@ class Public::PostsController < ApplicationController
       redirect_to post_path
     end
   end
+
+  def search
+    @posts = Post.page(params[:page]).per(10)
+    @word_for_search = Genre.find(params[:word_for_search])
+    @search_posts = Post.where(genre: params[:word_for_search])
+  end
+end
+
 
   def index
     @posts=Post.all
@@ -62,6 +72,5 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title,:body,:genre,:profile_imaage)
+    params.require(:post).permit(:title,:body,:genre_id,:profile_imaage)
   end
-end

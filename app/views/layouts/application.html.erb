@@ -21,13 +21,40 @@
          </button>
          <div class="collapse navbar-collapse" id="navbarNavDropdown">
            <ul class="navbar-nav ml-auto">
-             <% if user_signed_in? %>
+             <% if admin_signed_in? %>
+              <li class="nav-item">
+                <%= link_to admin_posts_path do %>
+                  <i class="fa-solid fa-cookie-bite">Posts</i>
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to admin_users_path do %>
+                  <i class="fa-solid fa-user">Users</i>
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to admin_genres_path do%>
+                  <i class="fa-solid fa-tag">ジャンル一覧</i>
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to destroy_admin_session_path, method: :delete do %>
+                  <i class="fa-solid fa-arrow-right-from-bracket">ログアウト</i>
+                <% end %>
+              </li>
+
+             <% elsif user_signed_in? %>
              <li>
-              <%=link_to user_path(@user.id),class: "nav-link text-light" do %>
+              <%=link_to user_path(current_user),class: "nav-link text-light" do %>
                <i class="fas fa-home"></i>
                Home
               <% end %>
              </li>
+             <li>
+              <%=link_to new_post_path,class: "nav-link text-light" do %>
+              <i class="fas fa-users"></i>
+              Create Post
+              <% end %>
              <li>
               <%=link_to users_path,class: "nav-link text-light" do %>
               <i class="fas fa-users"></i>

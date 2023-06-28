@@ -11,6 +11,11 @@ Rails.application.routes.draw do
 
 namespace :admin do
   get "/" => "homes#top"
+  resources :genres, only: [:index, :edit, :create, :update]
+  get "/search" => "posts#search"
+  resources :posts, only: [:index, :create, :new, :show, :edit, :update]
+  resources :users, only: [:index, :show, :edit, :update]
+  
  end
 
 scope module: :public do
@@ -20,6 +25,7 @@ scope module: :public do
   get "/users/unsubscribe" => "users#unsubscribe"
   patch "/users/is_deleted" => "users#is_deleted"
   resources :posts,only: [:new,:create,:index,:show,:destroy,:edit,:update]
+  get "/search" => "posts#search"
  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
