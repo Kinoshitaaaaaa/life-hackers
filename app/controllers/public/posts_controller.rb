@@ -6,9 +6,7 @@ class Public::PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @post.genre_id =
     @post.user_id = current_user.id
-    @user=current_user
 
     if @post.save
       flash[:notice] = "You have created post successfully."
@@ -22,7 +20,7 @@ class Public::PostsController < ApplicationController
   def show
     @post=Post.find(params[:id])
     @user=@post.user
-
+    @comment = Comment.new
   end
 
   def edit
@@ -72,5 +70,5 @@ end
   private
 
   def post_params
-    params.require(:post).permit(:title,:body,:genre_id,:profile_imaage)
+    params.require(:post).permit(:title,:body,:genre_id,:image)
   end

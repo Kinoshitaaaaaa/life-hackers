@@ -15,7 +15,7 @@ namespace :admin do
   get "/search" => "posts#search"
   resources :posts, only: [:index, :create, :new, :show, :edit, :update]
   resources :users, only: [:index, :show, :edit, :update]
-  
+
  end
 
 scope module: :public do
@@ -25,7 +25,10 @@ scope module: :public do
   get "/users/unsubscribe" => "users#unsubscribe"
   patch "/users/is_deleted" => "users#is_deleted"
   resources :posts,only: [:new,:create,:index,:show,:destroy,:edit,:update]
+  resource :likes, only: [:create, :destroy]
+  resources :comments, only: [:create, :destroy]
   get "/search" => "posts#search"
+
  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

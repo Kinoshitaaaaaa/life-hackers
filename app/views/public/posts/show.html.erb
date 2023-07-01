@@ -1,34 +1,42 @@
-<body>
-  <main>
+<div>
+  <%= image_tag @post.image %>
+  <p>タイトル：<%= @post.title %></p>
+  <p>Life Hack：<%= @post.body %></p>
+  <p>投稿ユーザー画像：<%= image_tag @post.user.get_profile_image(100,100) %></p>
+  <p>ユーザーネーム：<%= @post.user.user_name %></p>
+  <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
+  <% if @post.user == current_user %>
+    <%= link_to "削除", post_path(@post), method: :delete %>
+  <% end %>
+  <% if @post.liked_by?(current_user) %>
+    <p>
+      <%= link_to post_likes_path(@post), method: :delete do %>
+        ♥<%= @post.likes.count %> いいね
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to likes_path(@post), method: :post do %>
+        ♡<%= @post.likes.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
+</div>
 
-    <div class="container px-5 px-sm-0">
-     <div class="row">
-
-     <%= render 'create', posts: @posts %>
-
-    <div class="col-md-8 offset-md-1">
-      <h2>Post detail</h2>
-      <table class="table">
-        <tbody>
-         <tr>
-            <td>
-              <%= link_to user_path(@user) do %>
-               <%= image_tag @user.get_profile_image(100,100) %>
-                <br><%= @user.name %></td>
-              <% end %>
-            <td>
-              <%= link_to post_path(@post) do %>
-              <%= @post.title %>
-              <% end %>
-              </td>
-            <td><%= @post.body %></td>
-           <% if @post.user == current_user %>
-            <td><%= link_to "Edit", edit_post_path(@post),class: "btn btn-sm btn-success" %></td>
-            <td><%= link_to "Destroy", post_path(@post), method: :delete, class: "btn btn-sm btn-danger" %></td>
-           <% end %>
-         </tr>
-        </tbody>
-      </table>
-     </div>
-    </div>
-   </div>
+<div>
+  <p>コメント件数：<%= @post.comments.count %></p>
+  <% @post.comments.each do |comment| %>
+    <p><%= image_tag comment.user.get_profile_image(100,100) %></p>
+    <%= comment.user.user_name %>
+    <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+    <% if comment.user == current_user %>
+      <%= link_to "削除", comment_path(comment.post, comment), method: :delete %>
+    <% end %>
+  <% end %>
+</div>
+<div>
+  <%= form_with model: [@posts, @comment] do |f| %>
+    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+    <%= f.submit "送信する" %>
+  <% end %>
+</div>

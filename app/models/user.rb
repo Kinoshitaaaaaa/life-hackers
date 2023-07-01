@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_one_attached :profile_image
   has_many :posts, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :comments, dependent: :destroy
   validates :user_name, length: { minimum: 2, maximum: 20}
   validates :user_name, uniqueness: true
   validates :introduction, length: {maximum: 50}
@@ -17,5 +19,7 @@ class User < ApplicationRecord
    end
    profile_image.variant(resize_to_limit: [width, height]).processed
   end
+
+
 
 end

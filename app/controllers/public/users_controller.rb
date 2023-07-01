@@ -31,7 +31,7 @@ class Public::UsersController < ApplicationController
     @user=current_user
     @post=Post.new
     @users=User.all
-    
+
   end
 
   def is_deleted
