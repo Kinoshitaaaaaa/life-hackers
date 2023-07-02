@@ -37,8 +37,22 @@ class Public::PostsController < ApplicationController
     @posts = Post.page(params[:page]).per(10)
     @word_for_search = Genre.find(params[:word_for_search])
     @search_posts = Post.where(genre: params[:word_for_search])
+
   end
-end
+
+  def keyword_search
+     @range = params[:range]
+    if @range == "User"
+      @users = User.looks(params[:search], params[:word])
+    else
+      @posts = Post.looks(params[:search], params[:word])
+    end
+
+    render "search"
+
+  end
+
+
 
 
   def index
@@ -60,15 +74,15 @@ end
     if @post.update(post_params)
       flash[:notice] ="You have updated post successfully."
       redirect_to post_path(@post.id)
-
     else
       render :edit
     end
-
   end
 
-  private
+   private
 
-  def post_params
-    params.require(:post).permit(:title,:body,:genre_id,:image)
-  end
+    def post_params
+      params.require(:post).permit(:title,:body,:genre_id,:image)
+    end
+
+end

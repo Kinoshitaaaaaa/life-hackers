@@ -24,9 +24,13 @@ scope module: :public do
   resources :users,only: [:index, :create, :new, :show, :edit, :update]
   get "/users/unsubscribe" => "users#unsubscribe"
   patch "/users/is_deleted" => "users#is_deleted"
-  resources :posts,only: [:new,:create,:index,:show,:destroy,:edit,:update]
-  resource :likes, only: [:create, :destroy]
-  resources :comments, only: [:create, :destroy]
+  resources :posts,only: [:new,:create,:index,:show,:destroy,:edit,:update] do
+   resource :likes, only: [:create, :destroy]
+   resources :comments, only: [:create, :destroy]
+   get 'search'
+
+   end
+  get 'keyword_search' => "posts#keyword_search"
   get "/search" => "posts#search"
 
  end
