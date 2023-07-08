@@ -21,14 +21,17 @@ namespace :admin do
 scope module: :public do
   root "homes#top"
   get "/about" => "homes#about"
-  resources :users,only: [:index, :create, :new, :show, :edit, :update]
+  resources :users,only: [:index, :create, :new, :show, :edit, :update] do
+    member do
+    get :likes
+   end
+  end
   get "/users/unsubscribe" => "users#unsubscribe"
   patch "/users/is_deleted" => "users#is_deleted"
   resources :posts,only: [:new,:create,:index,:show,:destroy,:edit,:update] do
    resource :likes, only: [:create, :destroy]
    resources :comments, only: [:create, :destroy]
    get 'search'
-
    end
   get 'keyword_search' => "posts#keyword_search"
   get "/search" => "posts#search"

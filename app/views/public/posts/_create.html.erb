@@ -1,6 +1,7 @@
              <div class="col-md-3">
           <h2>User Info</h2>
           <%= image_tag @user.get_profile_image(100,100) %>
+          <%= link_to "いいねした投稿", likes_user_path(@user) %>
           <table class="table">
             <tbody>
               <tr>

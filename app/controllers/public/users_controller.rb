@@ -1,4 +1,7 @@
 class Public::UsersController < ApplicationController
+
+  before_action :set_user, only: [:likes]
+
   def show
     @user = User.find(params[:id])
     @posts = @user.posts
@@ -46,11 +49,20 @@ class Public::UsersController < ApplicationController
   def unsubscribe
   end
 
+  def likes
+    likes = Like.where(user_id: @user.id).pluck(:post_id)
+    @like_posts = Post.find(likes)
+  end
+
 
   private
 
   def user_params
     params.require(:user).permit(:user_name, :introduction, :profile_image)
+  end
+
+  def set_user
+    @user = User.find(params[:id])
   end
 
 end
