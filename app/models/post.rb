@@ -4,11 +4,16 @@ class Post < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
 
-  validates :title, presence: true
-  validates :body, presence: true
-  validates :body, length: {maximum: 500}
-  validates :genre_id, presence: true
-  validates :image, presence: true
+with_options presence: true, on: :publicize do
+  validates :title
+  validates :body
+  validates :body
+  validates :genre_id
+  validates :image
+end
+validates :title, length: { maximum: 30 }, on: :publicize
+validates :body, length: { maximum: 500 }, on: :publicize
+
 
   def self.looks(search, word)
     if search == "perfect_match"

@@ -7,14 +7,22 @@ class Public::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-
-    if @post.save
-      flash[:notice] = "You have created post successfully."
+   if params[:create]
+    if @post.save(context: :publicize)
+      flash[:notice] = "投稿に成功しました！"
       redirect_to post_path(@post.id)
     else
       @posts=Post.all
       render :index
     end
+
+   else
+    if @post.update(draft: true)
+        redirect_to user_path(current_user), notice: "投稿を下書き保存しました！"
+    else
+        render :new, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+    end
+   end
   end
 
   def show
@@ -69,20 +77,39 @@ class Public::PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find(params[:id])
-    @user = current_user
-    if @post.update(post_params)
-      flash[:notice] ="You have updated post successfully."
-      redirect_to post_path(@post.id)
+  @post = Post.find(params[:id])
+    # ①下書きの更新（公開）の場合
+    if params[:publicize_draft]
+      # 公開時にバリデーションを実施
+      @post.attributes = post_params.merge(draft: false)
+      if @post.save(context: :publicize)
+        redirect_to post_path(@post.id), notice: "下書きを公開しました！"
+      else
+        @post.draft = true
+        render :edit, alert: "投稿公開できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+      end
+    # ②公開済みの更新の場合
+    elsif params[:update_post]
+      @post.attributes = post_params
+      if @post.save(context: :publicize)
+        redirect_to post_path(@post.id), notice: "投稿を更新しました！"
+      else
+        render :edit, alert: "投稿を更新できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+      end
+    # ③下書きの更新（非公開）の場合
     else
-      render :edit
+      if @post.update(post_params)
+        redirect_to post_path(@post.id), notice: "下書きを更新しました！"
+      else
+        render :edit, alert: "更新できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+      end
     end
   end
 
-   private
+ private
 
-    def post_params
-      params.require(:post).permit(:title,:body,:genre_id,:image)
-    end
+  def post_params
+   params.require(:post).permit(:title,:body,:genre_id,:image,:draft,:user_id)
+  end
 
 end

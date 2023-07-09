@@ -25,7 +25,8 @@
 
             <%= f.text_area :body, class:"form-control", size: "50x10", placeholder:"投稿内容" %>
           <hr>
-          <%= f.submit '投稿', class:"btn btn-lg btn-block btn-info mt-4" %>
+          <%= f.submit 'LIFEHACKを公開', :name => 'create', class: 'mr-5 btn btn-sm btn-warning text-white' %>
+          <%= f.submit '下書きに保存', :name => 'draft', class: 'mr-5 btn btn-sm btn-outline-secondary' %>
         <% end %>
       </div>
     </div>

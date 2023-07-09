@@ -1,5 +1,5 @@
 class Admin::PostsController < ApplicationController
-  
+
   def new
     @post=Post.new
     @user=@post.user
@@ -25,11 +25,11 @@ class Admin::PostsController < ApplicationController
   end
 
   def edit
-    @user=current_user
+    @user=@post.user
     @post=Post.find(params[:id])
-    
+
       render "edit"
-    
+
   end
 
   def search
@@ -84,5 +84,5 @@ class Admin::PostsController < ApplicationController
       params.require(:post).permit(:title,:body,:genre_id,:image)
     end
 
-  
+
 end
