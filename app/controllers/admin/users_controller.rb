@@ -35,9 +35,9 @@ class Admin::UsersController < ApplicationController
   end
 
   def is_deleted
-    @user = current_user
-    @user.is_deleted = true
-    if @user.save
+    @user = User.find(params[:id])
+    # @user.is_deleted = true
+    if @user.update(is_deleted: true)
       reset_session
       redirect_to root_path
     end

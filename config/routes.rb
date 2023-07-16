@@ -13,21 +13,24 @@ namespace :admin do
   get "/" => "homes#top"
   resources :genres, only: [:index, :edit, :create, :update]
   get "/search" => "posts#search"
+  get "/users/unsubscribe" => "users#unsubscribe"
+  patch "/users/is_deleted" => "users#is_deleted"
   resources :posts, only: [:index, :create, :new, :show, :edit, :update]
-  resources :users, only: [:index, :show, :edit, :update]
+  resources :users, only: [:index, :show, :edit, :update, :destroy]
+
 
  end
 
 scope module: :public do
   root "homes#top"
   get "/about" => "homes#about"
-  resources :users,only: [:index, :create, :new, :show, :edit, :update] do
+  get "/users/unsubscribe" => "users#unsubscribe"
+  patch "/users/is_deleted" => "users#is_deleted"
+  resources :users,only: [:index, :create, :new, :show, :edit, :update, :destroy] do
     member do
     get :likes
    end
   end
-  get "/users/unsubscribe" => "users#unsubscribe"
-  patch "/users/is_deleted" => "users#is_deleted"
   resources :posts,only: [:new,:create,:index,:show,:destroy,:edit,:update] do
    resource :likes, only: [:create, :destroy]
    resources :comments, only: [:create, :destroy]

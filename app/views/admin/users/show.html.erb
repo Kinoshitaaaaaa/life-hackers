@@ -60,7 +60,7 @@
              <%= image_tag post.user.get_profile_image(80,80) %>
             </td>
             <td>
-            <%= link_to edit_admin_post_path(post) do %>
+            <%= link_to admin_post_path(post) do %>
              <%= post.title %>
             <% end %>
             </td>

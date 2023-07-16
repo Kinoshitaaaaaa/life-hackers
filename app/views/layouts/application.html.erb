@@ -24,12 +24,12 @@
              <% if admin_signed_in? %>
               <li class="nav-item">
                 <%= link_to admin_posts_path do %>
-                  <i class="fa-solid fa-cookie-bite">Posts</i>
+                  <i class="fas fa-book-open">投稿一覧</i>
                 <% end %>
               </li>
               <li class="nav-item">
                 <%= link_to admin_users_path do %>
-                  <i class="fa-solid fa-user">Users</i>
+                  <i class="fas fa-users">ユーザー一覧</i>
                 <% end %>
               </li>
               <li class="nav-item">
@@ -39,7 +39,7 @@
               </li>
               <li class="nav-item">
                 <%= link_to destroy_admin_session_path, method: :delete do %>
-                  <i class="fa-solid fa-arrow-right-from-bracket">ログアウト</i>
+                  <i class="fas fa-sign-out-alt">ログアウト</i>
                 <% end %>
               </li>
 
@@ -47,24 +47,24 @@
              <li>
               <%=link_to user_path(current_user),class: "nav-link text-light" do %>
                <i class="fas fa-home"></i>
-               Home
+               トップページ
               <% end %>
              </li>
              <li>
               <%=link_to new_post_path,class: "nav-link text-light" do %>
               <i class="fas fa-users"></i>
-              Create Post
+              投稿フォーム
               <% end %>
              <li>
               <%=link_to users_path,class: "nav-link text-light" do %>
               <i class="fas fa-users"></i>
-              Users
+              ユーザー一覧
               <% end %>
              </li>
               <li>
               <%=link_to posts_path,class: "nav-link text-light" do %>
               <i class="fas fa-book-open"></i>
-              Posts
+              投稿一覧
               <% end %>
              </li>
               <li>
@@ -72,7 +72,7 @@
              <li class="nav-item">
               <%= link_to destroy_user_session_path, method: :delete, class: "nav-link text-light" do %>
               <i class="fas fa-sign-out-alt"></i>
-              Log out
+              ログアウト
               <% end %>
              </li>
 
@@ -80,25 +80,25 @@
              <li>
               <%=link_to root_path,class: "nav-link text-light" do %>
               <i class="fas fa-home"></i>
-              Home
+              トップページ
               <% end %>
              </li>
              <li>
               <%=link_to about_path,class: "nav-link text-light" do %>
               <i class="fas fa-link"></i>
-              About
+              サイト概要
               <% end %>
              </li>
              <li>
               <%=link_to new_user_registration_path,class: "nav-link text-light" do %>
               <i class="fas fa-user-plus"></i>
-              Sign up
+              新規登録
               <% end %>
              </li>
              <li>
               <%=link_to new_user_session_path,class: "nav-link text-light" do %>
               <i class="fas fa-sign-in-alt"></i>
-              Log in
+              ログイン
               <% end %>
              </li>
              <% end %>
