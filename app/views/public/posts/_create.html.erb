@@ -1,11 +1,11 @@
              <div class="col-md-3">
-          <h2>User Info</h2>
+          <h2>会員様情報</h2>
           <%= image_tag @user.get_profile_image(100,100) %>
           <%= link_to "いいねした投稿", likes_user_path(@user) %>
           <table class="table">
             <tbody>
               <tr>
-                <th>User name</th>
+                <th>User Name</th>
                 <th><%= @user.user_name %></th>
               </tr>
               <tr>
@@ -19,7 +19,9 @@
             <i class="fas fa-user-cog"></i>
             <%end%>
           </div>
+          <div>
             <li class="mt-3">
+               <h5>投稿検索</h5>
              <%= form_with url: search_path, method: :get, local: true do |f| %>
                <%= f.collection_select :word_for_search, Genre.all, :id, :name %>
                   <%= f.submit "検索" %>
@@ -32,5 +34,6 @@
               <%= f.submit "検索", class: "btn btn-primary" %>
               <% end %>
             </div>
+          </div>
             </li>
          </div>

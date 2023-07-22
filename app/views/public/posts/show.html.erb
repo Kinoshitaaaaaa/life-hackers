@@ -1,7 +1,7 @@
-<div>
-  <%= image_tag @post.image, size:"120x120" %>
+ <div class="col-md-8 offset-md-1">
+  <%= image_tag @post.image, size:"300x300" %>
   <p>タイトル：<%= @post.title %></p>
-  <p>Life Hack：<%= @post.body %></p>
+  <p>LIFE HACK：<%= @post.body %></p>
   <p>投稿ユーザー画像：<%= image_tag @post.user.get_profile_image(80,80) %></p>
   <p>ユーザーネーム：<%= @post.user.user_name %></p>
   <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
@@ -24,7 +24,7 @@
   <% end %>
 </div>
 
-<div>
+<div class="col-md-8 offset-md-1">
   <p>コメント件数：<%= @post.comments.count %></p>
   <% @post.comments.each do |comment| %>
     <p><%= image_tag comment.user.get_profile_image(100,100) %></p>
@@ -35,9 +35,10 @@
     <% end %>
   <% end %>
 </div>
-<div>
+<div class="col-md-8 offset-md-1">
   <%= form_with model: [@post, @comment] do |f| %>
     <%= f.text_area :body, rows: '5', placeholder: "コメントをここに" %>
     <%= f.submit "送信する" %>
   <% end %>
+</div>
 </div>

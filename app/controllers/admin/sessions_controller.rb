@@ -22,7 +22,7 @@ class Admin::SessionsController < Devise::SessionsController
 
   protected
   def reject_is_deleted_user
-   
+
     if @user
       if (@user.valid_password?(params[:user][:password]) && (@user.is_deleted == true))
         flash[:notice] = "退会済みのためログインできません。"
