@@ -25,7 +25,7 @@ class Admin::PostsController < ApplicationController
   end
 
   def edit
-    @user=@post.user
+    @user=User.find(params[:id])
     @post=Post.find(params[:id])
 
       render "edit"

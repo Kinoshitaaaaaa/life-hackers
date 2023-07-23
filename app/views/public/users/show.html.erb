@@ -7,13 +7,12 @@
    <%= render 'public/posts/create', posts: @posts %>
 
     <div class="col-md-8 offset-md-1">
-      <h2>Posts</h2>
+      <h2>投稿</h2>
       <table class="table table-hover table-inverse">
         <thead>
           <tr>
-            <th></th>
-            <th>Title</th>
-            <th>Genre</th>
+            <th>投稿者</th>
+            <th>タイトル</th>
             <th colspan="3"></th>
           </tr>
         </thead>
@@ -28,7 +27,6 @@
              <%= post.title %>
             <% end %>
             </td>
-             <td><%= post.body %></td>
            <% end %>
           </tr>
         </tbody>

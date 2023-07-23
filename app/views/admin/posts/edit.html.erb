@@ -35,9 +35,9 @@
              <u><%= link_to "投稿を削除", "/post/#{@post.id}", method: :delete, data: {confirm: "この投稿を削除しますか？"}, class:'text-danger' %></u>
             </div>
            <% end %>
-           <%= link_to "Show", post_path(@post) %>
+           <%= link_to "投稿一覧", posts_path %>
             |
-           <%= link_to "Back", posts_path %>
+           <%= link_to "Back", post_path(@post)%>
         </div>
       </div>
     </div>

@@ -1,0 +1,33 @@
+<div class="plate mx-auto" id="cork">
+  <h1 class="text-center">Welcome!!</h1>
+</div>
+<div class="home-box col-sm-10 px-sm-0 offset-sm-1">
+    <p class="home-text">ようこそ、LIFEHCKERSへ！<br>
+    このサイトは、LIFEHACKを投稿・閲覧する為のコミュニティサイトです。<br>
+    是非会員登録して、あなたの自慢のLIFEHACKを聞かせてください！！
+    </p>
+  <div class="slide">
+    <div class="slide-item"><img class="d-block mx-auto" "slide-img" style="width:500px" src="assets/about-image.jpg"></div>
+  </div>
+</div>
+
+
+<div class="container new-post">
+  <h2>新着商品</h2>
+  <div class="row">
+      <% @posts.first(4).each do |post| %>
+    <div class="col-md-3 col-sm-6">
+        <div class="card w-100 bg-transparent border-0" style="width: 18rem;">
+          <%= link_to post_path(post) do %>
+            <div class="img-wrap"><%= image_tag post.image, width: "100%", height: "200px",fallback: "no_image.jpg" %></div>
+          <% end %>
+          <div class="card-body">
+            <p class="card-text"><%= post.title %></p>
+
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="all-posts-show-button"><%= link_to "全ての投稿をみる", posts_path %></div>
+</div>

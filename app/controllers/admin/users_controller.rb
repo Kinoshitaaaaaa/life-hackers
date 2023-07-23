@@ -39,7 +39,7 @@ class Admin::UsersController < ApplicationController
     # @user.is_deleted = true
     if @user.update(is_deleted: true)
       reset_session
-      redirect_to root_path
+      redirect_to admin_users_path
     end
   end
 
