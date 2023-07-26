@@ -26,7 +26,7 @@
                <%= f.collection_select :word_for_search, Genre.all, :id, :name %>
                   <%= f.submit "検索" %>
                <% end %>
-             <div class="search_form">
+             <div class="search_form" "mt-3">
               <%= form_with url: keyword_search_path, local: true, method: :get do |f| %>
                <%= f.text_field :word %>
                <%= f.select :range, options_for_select([['User'], ['Post']]) %>

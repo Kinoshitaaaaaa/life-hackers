@@ -42,11 +42,14 @@ class Public::PostsController < ApplicationController
   end
 
   def search
-    @posts = Post.page(params[:page]).per(10)
-    @word_for_search = Genre.find(params[:word_for_search])
-    @search_posts = Post.where(genre: params[:word_for_search])
-
+    if params[:word_for_search]
+      @posts = Post.where(genre_id: params[:word_for_search]).page(params[:page]).per(10)
+    else
+      @posts = Post.page(params[:page]).per(10)
+    end
   end
+
+
 
   def keyword_search
      @range = params[:range]

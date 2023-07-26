@@ -18,11 +18,14 @@
         </thead>
         <tbody>
          <% @users.each do |user| %>
+          <% if user.is_deleted == false %>
           <tr>
             <td><%= image_tag user.get_profile_image(80,80) %></td>
             <td><%= user.user_name %></td>
             <td><%= link_to "詳細", admin_user_path(user.id) %></td>
+             <td><%= user.user_name %></td>
           </tr>
+         <%end%>
          <% end %>
         </tbody>
       </table>
