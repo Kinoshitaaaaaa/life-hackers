@@ -13,7 +13,7 @@ class Public::PostsController < ApplicationController
       redirect_to post_path(@post.id)
     else
       @posts=Post.all
-      render :index
+      render :new
     end
 
    else
@@ -67,7 +67,7 @@ class Public::PostsController < ApplicationController
 
 
   def index
-    @posts=Post.all
+    @posts=Post.where(draft:0)
     @user=current_user
     @post=Post.new
     @users=User.all

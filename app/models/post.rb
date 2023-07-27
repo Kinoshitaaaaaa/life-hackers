@@ -8,9 +8,8 @@ class Post < ApplicationRecord
 with_options presence: true, on: :publicize do
   validates :title
   validates :body
-  validates :body
   validates :genre_id
-  validates :image
+
 end
 validates :title, length: { maximum: 30 }, on: :publicize
 validates :body, length: { maximum: 500 }, on: :publicize
@@ -34,5 +33,12 @@ validates :body, length: { maximum: 500 }, on: :publicize
     likes.exists?(user_id: user.id)
   end
 
+  def get_image(width, height)
+   unless image.attached?
+     file_path = Rails.root.join('app/assets/images/sample-author1.jpg')
+     image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+   end
+    image.variant(resize_to_limit: [width, height]).processed
+  end
 
 end

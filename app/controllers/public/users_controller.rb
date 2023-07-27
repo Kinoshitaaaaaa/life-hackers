@@ -5,6 +5,9 @@ class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @posts = @user.posts
+    if current_user!=@user
+      @posts=@posts.where(draft:0)
+    end
     @post=Post.new
 
   end
