@@ -16,7 +16,13 @@ namespace :admin do
   get "/users/unsubscribe" => "users#unsubscribe"
   patch "/users/is_deleted" => "users#is_deleted"
   resources :posts, only: [:index, :create, :new, :show, :edit, :update]
-  resources :users, only: [:index, :show, :edit, :update, :destroy]
+  resources :users, only: [:index, :show, :edit, :update, :destroy] do
+    member do
+    get :likes
+   
+  end
+
+  end
 
 
  end

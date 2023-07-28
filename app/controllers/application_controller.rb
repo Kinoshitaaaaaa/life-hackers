@@ -1,16 +1,25 @@
 class ApplicationController < ActionController::Base
 
-  before_action :authenticate_user!, except: [:top,:about]
+  before_action :authenticate_admin!, if: :admin_url
+
+  def admin_url
+    request.fullpath.include?("/admin")
+  end
   before_action :configure_permitted_parameters, if: :devise_controller?
-
-  add_flash_types :success, :info, :warning, :danger
-
   def after_sign_in_path_for(resource)
-    users_path(resource)
+    if resource == :admin
+      admin_user_path
+    else
+      root_path
+    end
   end
 
   def after_sign_out_path_for(resource)
-    root_path
+    if resource == :admin
+      new_admin_session_path
+    else
+      new_user_session_path
+    end
   end
 
 

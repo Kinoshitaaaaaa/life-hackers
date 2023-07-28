@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-          <h1>Editing Post</h1>
+          <h1>投稿編集</h1>
            <% if @post.errors.any? %>
              <h3><%= @poat.errors.count %>errors prohibited this obj from being saved:</h3>
              <ul>
@@ -32,7 +32,7 @@
              </div>
             </div>
             <div class="mt-4 pb-3 text-center">
-             <u><%= link_to "投稿を削除", "/post/#{@post.id}", method: :delete, data: {confirm: "この投稿を削除しますか？"}, class:'text-danger' %></u>
+             <u><%= link_to "投稿を削除", post_path(@post), method: :delete, data: {confirm: "この投稿を削除しますか？"}, class:'text-danger' %></u>
             </div>
            <% end %>
             <%= link_to "投稿一覧", posts_path %>

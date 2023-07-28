@@ -32,7 +32,7 @@
              </div>
             </div>
             <div class="mt-4 pb-3 text-center">
-             <u><%= link_to "投稿を削除", "/post/#{@post.id}", method: :delete, data: {confirm: "この投稿を削除しますか？"}, class:'text-danger' %></u>
+             <u><%= link_to "投稿を削除", admin_post_path(@post), method: :delete, data: {confirm: "この投稿を削除しますか？"}, class:'text-danger' %></u>
             </div>
            <% end %>
            <%= link_to "投稿一覧", posts_path %>
