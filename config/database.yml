@@ -23,7 +23,7 @@ test:
 production:
   production:
   <<: *default
-  database: <%= ENV['LIFE HACKERS'] %>
+  database: <%= ENV['life-hackers'] %>
   adapter: mysql2
   encoding: utf8mb4
   charset: utf8mb4
