@@ -19,7 +19,7 @@ namespace :admin do
   resources :users, only: [:index, :show, :edit, :update, :destroy] do
     member do
     get :likes
-   
+
   end
 
   end
