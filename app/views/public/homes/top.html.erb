@@ -7,13 +7,16 @@
     是非会員登録して、あなたの自慢のLIFEHACKを聞かせてください！！
     </p>
   <div class="slide">
-    <div class="slide-item"><img class="d-block mx-auto" "slide-img" style="width:500px" src="assets/about-image.jpg"></div>
+    <div class="slide-item">
+      <%= image_tag 'about-image.jpg' %>
+<p>test</p>
+      <img class="d-block mx-auto" "slide-img" style="width:500px" src="assets/about-image.jpg"></div>
   </div>
 </div>
 
 
 <div class="container new-post">
-  <h2>新着商品</h2>
+  <h2>新着投稿</h2>
   <div class="row">
       <% @posts.first(4).each do |post| %>
     <div class="col-md-3 col-sm-6">
